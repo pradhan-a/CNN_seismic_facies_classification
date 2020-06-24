@@ -1,4 +1,13 @@
-"""Train the model"""
+#######################
+# Facies prediction from seismic data by CNN-based semantic segmentation 
+# Author: Anshuman Pradhan 
+# Email: pradhan1@stanford.edu; pradhan.a269@gmail.com
+#######################
+
+# Main code for importing training data, defining the CNN architecture, training the CNN
+# Code structure and organization adapted by Stanford CS230 starter project code
+# Note: tf graph for CNN network is split over 2 GPUs 
+#########################
 
 import argparse
 import logging
@@ -15,20 +24,20 @@ from model.utils import save_dict_to_json
 from model.model_fn import model_fn
 from model.training import train_and_evaluate
 
+# Command line arguments for specifying the path to data and model directories
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_dir', default='experiments/test',
                     help="Experiment directory containing params.json")
 parser.add_argument('--data_dir', default='Data',
-                    help="Directory containing the dataset")
+                    help="Directory containing tfrecords files for training and validation set")
 parser.add_argument('--restore_from', default=None,
                     help="Optional, directory or file containing weights to reload before training")
-parser.add_argument('--gpu', default='0',
-                    help="The GPU device to use")
 parser.add_argument('--mem_frac', default='1',
-                    help="The GPU device to use")
-
+                    help="The GPU memory fractions to use")
 
 if __name__ == '__main__':
+
+    os.environ['TF_ENABLE_AUTO_MIXED_PRECISION'] = '1'
     
     # Load the parameters from json file
     args = parser.parse_args()
@@ -37,24 +46,14 @@ if __name__ == '__main__':
     print(json_path)
     params = Params(json_path)
 
-    # Set visible GPU devices
-    os.environ['CUDA_VISIBLE_DEVICES']=args.gpu
-
     # Set the random seed for the whole graph for reproductible experiments
     tf.set_random_seed(230)
-
-    # Check that we are not overwriting some previous experiment
-    # Comment these lines if you are developing your model and don't care about overwritting
-    #model_dir_has_best_weights = os.path.isdir(os.path.join(args.model_dir, "best_weights"))
-    #overwritting = model_dir_has_best_weights and args.restore_from is None
-    #assert not overwritting, "Weights found in model_dir, aborting to avoid overwrite"
 
     # Set the logger
     set_logger(os.path.join(args.model_dir, 'train.log'))
 
     # Create the input data pipeline
     logging.info("Creating the datasets...")
-    
     data_dir = args.data_dir
     train_filenames = os.path.join(data_dir, "Train.tfrecords")
     eval_filenames = os.path.join(data_dir, "Eval.tfrecords")
