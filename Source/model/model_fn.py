@@ -134,7 +134,7 @@ def build_dilatedconv_model_gradual(is_training, inputs, params):
     dilate_factors_block4=[8,16,32]
 
     #Number of channels kept constant in each layer
-    num_channels=32
+    num_channels=params.num_channels
 
 
     # Graph for first gpu
