@@ -32,8 +32,6 @@ parser.add_argument('--data_dir', default='Data',
                     help="Directory containing tfrecords files for training and validation set")
 parser.add_argument('--restore_from', default=None,
                     help="Optional, directory or file containing weights to reload before training")
-parser.add_argument('--mem_frac', default='1',
-                    help="The GPU memory fractions to use")
 
 if __name__ == '__main__':
 
@@ -71,4 +69,4 @@ if __name__ == '__main__':
 
     # Train the model
     logging.info("Starting training for {} epoch(s)".format(params.num_epochs))
-    train_and_evaluate(train_model_spec, eval_model_spec, args.model_dir, params, args.mem_frac, args.restore_from)
+    train_and_evaluate(train_model_spec, eval_model_spec, args.model_dir, params, args.restore_from)

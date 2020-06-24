@@ -1,13 +1,20 @@
-"""Create the input data pipeline using `tf.data`"""
+#######################
+# Facies prediction from seismic data by CNN-based semantic segmentation 
+# Author: Anshuman Pradhan 
+# Email: pradhan1@stanford.edu; pradhan.a269@gmail.com
+#######################
+
+# Input function for creating data pipeline from tfrecords files
+# Code for decoding tfrecords adapted from examples found online
+#########################
 
 import tensorflow as tf
 
 def parse_func(serialized,n_xi,n_yi,n_zi,n_xo,n_yo,n_zo):
     # Define a dict with the data-names and types we expect to
     # find in the TFRecords file.
-    # It is a bit awkward that this needs to be specified again,
-    # because it could have been written in the header of the
-    # TFRecords file instead.
+    # 'seis' refers to input seismic volume
+    # 'fac' refers to output facies (rock type class) volume
     features = \
         {
             'seis': tf.FixedLenFeature([], tf.string),
@@ -21,6 +28,7 @@ def parse_func(serialized,n_xi,n_yi,n_zi,n_xo,n_yo,n_zo):
     # Get the image as raw bytes.
     seis_raw = parsed_example['seis']
     fac_raw = parsed_example['fac']
+
     # Decode the raw bytes so it becomes a tensor with type.
     seis = tf.cast(tf.reshape(tf.decode_raw(seis_raw, tf.float64),(n_zi,n_xi,n_yi,1)),dtype=tf.float32)
     fac = tf.cast(tf.reshape(tf.decode_raw(fac_raw, tf.float64),(n_zo,n_xo,n_yo,1)),dtype=tf.float32)
@@ -30,6 +38,8 @@ def parse_func(serialized,n_xi,n_yi,n_zi,n_xo,n_yo,n_zo):
 
 
 def input_fn(is_training, filenames, params):
+    
+    # Read in i/p and o/p volume sizes from params files
     n_xi=params.input_size_x
     n_yi=params.input_size_y
     n_zi=params.input_size_z

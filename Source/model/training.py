@@ -1,4 +1,12 @@
-"""Tensorflow utility functions for training"""
+#######################
+# Facies prediction from seismic data by CNN-based semantic segmentation 
+# Author: Anshuman Pradhan 
+# Email: pradhan1@stanford.edu; pradhan.a269@gmail.com
+#######################
+
+# Tensorflow utility functions for training
+#########################
+
 
 import logging
 import os
@@ -32,22 +40,14 @@ def train_sess(sess, model_spec, num_steps, params, writer=None):
     sess.run(model_spec['iterator_init_op'])
     sess.run(model_spec['metrics_init_op'])
 
-    # Use tqdm for progress bar
+    # Use tqdm for progress bar if desired
     #t = trange(num_steps)
     for i in range(num_steps):
-        print("Running step"+str(i)+"/"+str(num_steps))
-        """
-        # Evaluate summaries for tensorboard only once in a while
-        if i % params.save_summary_steps == 0:
-            # Perform a mini-batch update
-            _, _, loss_val, summ, global_step_val = sess.run([train_op, update_metrics, loss,
-                                                              summary_op, global_step])
-            # Write summaries for tensorboard
-            writer.add_summary(summ, global_step_val)
-        else:
-            _, _, loss_val = sess.run([train_op, update_metrics, loss])
-            """
-        _, _, loss_val = sess.run([train_op, update_metrics, loss])#added after commenting out above
+        #print("Running batch"+str(i)+"/"+str(num_steps))#Uncomment for tqdm
+    
+        # Perform a mini-batch update
+        run_options = tf.RunOptions(report_tensor_allocations_upon_oom = True)
+        _, _, loss_val = sess.run([train_op, update_metrics, loss],options=run_options)
         # Log the loss in the tqdm progress bar
         #t.set_postfix(loss='{:05.3f}'.format(loss_val))
 
@@ -58,7 +58,7 @@ def train_sess(sess, model_spec, num_steps, params, writer=None):
     logging.info("- Train metrics: " + metrics_string)
 
 
-def train_and_evaluate(train_model_spec, eval_model_spec, model_dir, params, mem_frac,restore_from=None):
+def train_and_evaluate(train_model_spec, eval_model_spec, model_dir, params,restore_from=None):
     """Train the model and evaluate every epoch.
 
     Args:
@@ -74,10 +74,9 @@ def train_and_evaluate(train_model_spec, eval_model_spec, model_dir, params, mem
     best_saver = tf.train.Saver(max_to_keep=1)  # only keep 1 best checkpoint (best on eval)
     begin_at_epoch = 0
 
-    config = tf.ConfigProto()
-    config.gpu_options.per_process_gpu_memory_fraction = float(mem_frac)
+    gpu_options = tf.GPUOptions(allow_growth=True)
 
-    with tf.Session(config=config) as sess:
+    with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options,allow_soft_placement=True)) as sess:
         # Initialize model variables
         sess.run(train_model_spec['variable_init_op'])
 
@@ -89,17 +88,12 @@ def train_and_evaluate(train_model_spec, eval_model_spec, model_dir, params, mem
                 begin_at_epoch = int(restore_from.split('-')[-1])
             last_saver.restore(sess, restore_from)
 
-        # For tensorboard (takes care of writing summaries to files)
-        #train_writer = tf.summary.FileWriter(os.path.join(model_dir, 'train_summaries'), sess.graph)
-        #eval_writer = tf.summary.FileWriter(os.path.join(model_dir, 'eval_summaries'), sess.graph)
-
         best_eval_acc = 0.0
         for epoch in range(begin_at_epoch, begin_at_epoch + params.num_epochs):
             # Run one epoch
             logging.info("Epoch {}/{}".format(epoch + 1, begin_at_epoch + params.num_epochs))
             # Compute number of batches in one epoch (one full pass over the training set)
             num_steps = (params.train_size + params.batch_size - 1) // params.batch_size
-            #train_sess(sess, train_model_spec, num_steps, params, train_writer)
             train_sess(sess, train_model_spec, num_steps, params)
 
             # Save weights
@@ -108,7 +102,7 @@ def train_and_evaluate(train_model_spec, eval_model_spec, model_dir, params, mem
 
             # Evaluate for one epoch on validation set
             num_steps = (params.eval_size + params.batch_size - 1) // params.batch_size
-            metrics = evaluate_sess(sess, eval_model_spec, num_steps)
+            metrics = evaluate_sess(sess, model_dir, eval_model_spec, num_steps)
 
             # If best_eval, best_save_path
             eval_acc = metrics['accuracy']
