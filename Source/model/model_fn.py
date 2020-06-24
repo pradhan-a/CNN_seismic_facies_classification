@@ -117,6 +117,7 @@ def build_dilatedconv_model_gradual(is_training, inputs, params):
     out = seis
 
     bn_momentum = params.bn_momentum
+    num_channels=params.num_channels#Number of channels kept constant in each layer
 
     # Network divided into blocks for easily splitting over the two GPUs being used
     # Note some empirical experimentation required to decide optimal memory splitting over the two GPUs
@@ -132,9 +133,6 @@ def build_dilatedconv_model_gradual(is_training, inputs, params):
 
     num_conv_layers_block4=3
     dilate_factors_block4=[8,16,32]
-
-    #Number of channels kept constant in each layer
-    num_channels=params.num_channels
 
 
     # Graph for first gpu
