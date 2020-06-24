@@ -1,0 +1,27 @@
+{
+    "model_version": "dilatedconv",
+
+    "learning_rate": 1e-3,
+    "batch_size": 16,
+    "num_epochs": 75,
+
+    "num_layers": 8,
+    "num_channels": 32,
+    "num_labels": 5,
+    "num_dilate_layers": 5,
+    "use_batch_norm": true,
+    "bn_momentum": 0.9,
+
+    "train_size": 100,
+    "eval_size": 20,
+    "dev_size": 20,
+    "input_size_x": 105,
+    "input_size_y": 115,
+    "input_size_z": 50,
+    "output_size_x": 105,
+    "output_size_y": 115,
+    "output_size_z": 200,
+
+    "num_parallel_calls":4,
+    "save_summary_steps": 100
+}
