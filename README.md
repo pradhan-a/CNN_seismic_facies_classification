@@ -1,1 +1,2 @@
-# CNN_rock_type_segmentation
+# Facies classification from seimsic data using 3D CNNs
+
