@@ -1,4 +1,12 @@
-"""General utility functions"""
+#######################
+# Facies prediction from seismic data by CNN-based semantic segmentation 
+# Author: Anshuman Pradhan 
+# Email: pradhan1@stanford.edu; pradhan.a269@gmail.com
+#######################
+
+# General utility functions adapted from Stanford CS230 starter project code
+#########################
+
 
 import json
 import logging

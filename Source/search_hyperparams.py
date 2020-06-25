@@ -1,4 +1,11 @@
-"""Peform hyperparemeters search"""
+#######################
+# Facies prediction from seismic data by CNN-based semantic segmentation 
+# Author: Anshuman Pradhan 
+# Email: pradhan1@stanford.edu; pradhan.a269@gmail.com
+#######################
+
+# Perform hyper-parameter search. Define distributions and loop over hyper-parameters to be optimized
+#########################
 
 import argparse
 import os
@@ -12,15 +19,11 @@ PYTHON = sys.executable
 parser = argparse.ArgumentParser()
 parser.add_argument('--parent_dir', default='experiments/learning_rate',
                     help="Directory containing params.json")
-parser.add_argument('--data_dir', default='data/64x64_SIGNS',
+parser.add_argument('--data_dir', default='Data',
                     help="Directory containing the dataset")
-parser.add_argument('--gpu', default='0',
-                    help="The GPU device to use")
-parser.add_argument('--mem_frac', default='1',
-                    help="The GPU device to use")
 
 
-def launch_training_job(parent_dir, data_dir, gpu, mem_frac, job_name, params):
+def launch_training_job(parent_dir, data_dir, job_name, params):
     """Launch training of the model with a set of hyperparameters in parent_dir/job_name
 
     Args:
@@ -38,8 +41,8 @@ def launch_training_job(parent_dir, data_dir, gpu, mem_frac, job_name, params):
     params.save(json_path)
 
     # Launch training with this config
-    cmd = "{python} train.py --model_dir {model_dir} --data_dir {data_dir} --gpu {gpu} --mem_frac {mem_frac}".format(python=PYTHON,
-            model_dir=model_dir, data_dir=data_dir, gpu=gpu, mem_frac=mem_frac)
+    cmd = "{python} train.py --model_dir {model_dir} --data_dir {data_dir}".format(python=PYTHON,
+            model_dir=model_dir, data_dir=data_dir)
     print(cmd)
     check_call(cmd, shell=True)
 
@@ -60,4 +63,4 @@ if __name__ == "__main__":
 
         # Launch job (name has to be unique)
         job_name = "learning_rate_{}".format(learning_rate)
-        launch_training_job(args.parent_dir, args.data_dir, args.gpu, args.mem_frac, job_name, params)
+        launch_training_job(args.parent_dir, args.data_dir, job_name, params)

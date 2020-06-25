@@ -1,4 +1,11 @@
-"""Aggregates results from the metrics_eval_best_weights.json in a parent folder"""
+#######################
+# Facies prediction from seismic data by CNN-based semantic segmentation 
+# Author: Anshuman Pradhan 
+# Email: pradhan1@stanford.edu; pradhan.a269@gmail.com
+#######################
+
+# Aggregates results from the metrics_eval_best_weights.json in a parent folder. Adapted from Stanford CS230 starter project code
+#########################
 
 import argparse
 import json
