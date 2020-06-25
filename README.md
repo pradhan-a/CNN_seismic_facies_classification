@@ -1,2 +1,2 @@
-# Facies classification from seimsic data using 3D CNNs
+# Facies classification from seimsic data using deep 3D CNNs
 
