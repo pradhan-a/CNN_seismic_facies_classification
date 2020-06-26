@@ -6,10 +6,11 @@ The data we have is volumes of seismic data (see top right image below). Note se
 
 ![Alt text](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Figures/Picture1.png)
 
-### The Machine learnng problem: Learn to classify every pixel/voxel of 3D grid of the earth into rock classes given input seismic data (4D tensor)
-Our CNN architecture (see image below) is inspired by fully-connected networks used for *semantic segamentation* problems (Long et al., 2015). We use dilated 
+### The Machine learning problem: Learn to classify every pixel/voxel of 3D grid of the earth into rock classes given input seismic data (4D tensor)
+Our CNN architecture (see image below) is inspired by fully-connected networks used for *semantic segamentation* problems (Long et al., 2015). We use dilated convolutional filters (Yu and Koltun, 2016) 
 
 ![Alt text](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Figures/Picture2.png)
 
 ### References
-* Jonathan Long, Evan Shelhamer, Trevor Darrell; The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, pp. 3431-3440
+* Long, J., Shelhamer, E., Darrell T.,Fully Convolutional Networks for Semantic Segmentation, The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, pp. 3431-3440
+* Yu, F., and Koltun, V., Multi-scale context aggregation by dilated convolutions, in Proc. Int. Conf. Learn. Representations, 2016.
