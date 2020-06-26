@@ -19,18 +19,18 @@ Code [train.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/mas
 * [input_fn.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/model/input_fn.py) builds the input data pipeline
 #### Creating and training the CNN model 
 * [model_fn.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/model/model_fn.py) builds the tf graph for the CNN shown above. Note for CNN arcitecture shown above, we split the tf graph over two 32 GB Tesla V100 GPUs. 
-* We used the softmax crossentropy loss to optimize the network parameters
+* We used the softmax crossentropy loss to optimize the network parameters.
 #### Evaluating the model
-* Use [evaluate.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/evaluate.py) to evaluate trained network at test time
-* In [evaluation.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/model/evaluation.py), we provide two evaluation functions for cases with and without Monte-Carlo dropout
+* Use [evaluate.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/evaluate.py) to evaluate trained network at test time.
+* In [evaluation.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/model/evaluation.py), we provide two evaluation functions for cases with and without Monte-Carlo dropout.
 
 ### Referencing this work
 For citing this work, please use citation  "Pradhan A., and Mukerji, T., Seismic inversion for reservoir facies under geologically realistic prior uncertainty with 3D convolutional neural networks, 90th Annual International Meeting, SEG, Expanded Abstracts, 2020".
 
 ### References
-* Ioffe, S., Szegedy, C., Batch normalization: accelerating deep network training by reducing internal covariate shift. In: Bach, F., Blei, D. (eds.) Proceedings of the 32nd International Conference on International Conference on Machine Learning - Volume 37(ICML’15), vol. 37, pp. 448–456 (2015) JMLR.org
+* Ioffe, S., Szegedy, C., Batch normalization: accelerating deep network training by reducing internal covariate shift. In: Bach, F., Blei, D. (eds.) Proceedings of the 32nd International Conference on International Conference on Machine Learning - Volume 37(ICML’15), vol. 37, pp. 448–456 (2015) JMLR.org.
 * Gal, Y., and Ghahramani, Z., Bayesian convolutional neural networks with Bernoulli approximate variational inference. arXiv:1506.02158, 2015.
-* Long, J., Shelhamer, E., Darrell T.,Fully Convolutional Networks for Semantic Segmentation, The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, pp. 3431-3440
+* Long, J., Shelhamer, E., Darrell T.,Fully Convolutional Networks for Semantic Segmentation, The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, pp. 3431-3440.
 * Pradhan A., and Mukerji, T., Seismic inversion for reservoir facies under geologically realistic prior uncertainty with 3D convolutional neural networks, 90th Annual
 International Meeting, SEG, Expanded Abstracts, 2020.
 * Yu, F., and Koltun, V., Multi-scale context aggregation by dilated convolutions, in Proc. Int. Conf. Learn. Representations, 2016.
