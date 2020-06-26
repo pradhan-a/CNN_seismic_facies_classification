@@ -1,5 +1,5 @@
 # Reservoir facies (rock type) classification from seismic data using deep 3D CNNs
-### Variables
+### Variables & Data
 The prediction variable is  facies (rock class) at every pixel of a 3D discretized grid of the petroleum reservoir (see top right image below). In the images below, the plane formed by *x* and *y* dimensions refer to the surface plane of the earth. The *depth* dimension of facies model refers to depth below the earth surface.
 
 The data we have is volumes of seismic data (see top left image below). Note seismic data also has *x* and *y* dimensions, but seismic signals are recorded in time. Hence, the third dimension is *time*.  Note, seismic signals can be recorded along different angles of acquisition, corresponding to *channel* dimension (post/near/far stacks below). Thus, input seismic data is a 4D tensor. Also note, *time* and *depth* dimensions will have, in general, different sizes.
