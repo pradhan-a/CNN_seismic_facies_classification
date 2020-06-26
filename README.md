@@ -6,13 +6,13 @@ The data we have is volumes of seismic data (see top left image below). Note sei
 
 ![Alt text](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Figures/Picture1.png)
 
-### The machine learning problem: Learn to classify every pixel/voxel of 3D grid of the earth into rock classes given input seismic data (4D tensor)
+### The machine learning problem: learn to classify every pixel/voxel of 3D grid of the earth into rock classes given input seismic data (4D tensor)
 Our CNN architecture (see image below) is inspired by fully-connected networks used for *semantic segamentation* problems (Long et al., 2015). We use dilated convolutional filters (Yu and Koltun, 2016) to exponentially increase the field of view. Transposed convolutional layers are used to upsample from *time* to *depth* dimension. We also use batch-norm (Ioffe, and Szegedy, 2015) and Monte-Carlo dropout (Gal and Ghahramani, 2015) layers after every convolutional layer. Monte-Carlo dropout calculates the epistemic uncertainty of network.
 
 ![Alt text](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Figures/Picture2.png)
 
 ### Tensorflow (tf) impementation
-Code [train.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/train.py) contains main code for trianing the CNN. This creates the input data pipeline, builds the tf graph and trians it. We expound on these aspects in detail below.
+Code [train.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/train.py) contains main code for training the CNN. This creates the input data pipeline, builds the tf graph and trians it. We expound on these aspects in detail below.
 #### Data processing
 * The training data is created by sampling from a prior probability model of geological and geophysical uncertainty (see Pradhan and Mukerji, 2020 under "References" directory). For the example shown in Pradhan and Mukerji, 2020, we had training/validation/test set sizes of 2000/200/200. 
 * To efficiently handle the large training data size, we build the tf data pipeline using tfrecords data format. See [build_tfrecords.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/build_tfrecord.py) for reading in training examples stored as ascii files and compiling them into a tfrecords file. Once a tfrecords file is created, tf loads them instantaneously during trianing.
