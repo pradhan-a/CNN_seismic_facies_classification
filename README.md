@@ -1,4 +1,4 @@
-# Reservoir facies (rock type) classification from seimsic data using deep 3D CNNs
+# Reservoir facies (rock type) classification from seismic data using deep 3D CNNs
 ### Variables
 The prediction variable is  facies (rock class) at every pixel of a 3D discretized grid of the petroleum reservoir (see top right image below). In the images below, the plane formed by *x* and *y* dimensions refer to the surface plane of the earth. The *depth* dimension of facies model refers to depth below the earth surface.
 
