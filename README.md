@@ -3,4 +3,4 @@
 
 Reservoir facies refers rock type 
 
-!(CNN_rock_type_segmentation/Figures/Picture1.png?raw=true "Title")
+![Alt text](CNN_rock_type_segmentation/Figures/Picture1.png?raw=true "Title")
