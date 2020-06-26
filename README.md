@@ -14,7 +14,7 @@ Our CNN architecture (see image below) is inspired by fully-connected networks u
 ### Tensorflow (tf) impementation
 Code [train.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/train.py) contains main code for training the CNN. This creates the input data pipeline, builds the tf graph and trians it. We expound on these aspects in detail below.
 #### Data processing
-* The training data is created by sampling from a prior probability model of geological and geophysical uncertainty (see Pradhan and Mukerji, 2020 under "References" directory). For the example shown in Pradhan and Mukerji, 2020, we had training/validation/test set sizes of 2000/200/200. 
+* The training data is created by sampling from a prior probability model of geological and geophysical uncertainty (see [Pradhan and Mukerji, 2020](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/References/Pradhan%26Mukerji2020_CNN_seismic_facies.pdf) ). For the example shown in Pradhan and Mukerji, 2020, we had training/validation/test set sizes of 2000/200/200. 
 * To efficiently handle the large training data size, we build the tf data pipeline using tfrecords data format. See [build_tfrecords.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/build_tfrecord.py) for reading in training examples stored as ascii files and compiling them into a tfrecords file. Once a tfrecords file is created, tf loads them instantaneously during trianing.
 * [input_fn.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/model/input_fn.py) builds the input data pipeline
 #### Creating and training the CNN model 
@@ -23,6 +23,9 @@ Code [train.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/mas
 #### Evaluating the model
 * Use [evaluate.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/evaluate.py) to evaluate trained network at test time
 * In [evaluation.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/model/evaluation.py), we provide two evaluation functions for cases with and without Monte-Carlo dropout
+
+### Referencing this work
+For citing this work, please use citation  "Pradhan A., and Mukerji, T., Seismic inversion for reservoir facies under geologically realistic prior uncertainty with 3D convolutional neural networks, 90th Annual International Meeting, SEG, Expanded Abstracts, 2020".
 
 ### References
 * Ioffe, S., Szegedy, C., Batch normalization: accelerating deep network training by reducing internal covariate shift. In: Bach, F., Blei, D. (eds.) Proceedings of the 32nd International Conference on International Conference on Machine Learning - Volume 37(ICML’15), vol. 37, pp. 448–456 (2015) JMLR.org
