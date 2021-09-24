@@ -9,7 +9,7 @@ The data we have is volumes of seismic data (see top left image below). Note sei
 ### The machine learning problem: use deep 3D CNNs to classify every pixel/voxel of 3D grid of the earth into rock classes given input seismic data (4D tensor)
 Our CNN architecture (see image below) is inspired by fully-connected networks used for *semantic segamentation* problems (Long et al., 2015). We use dilated convolutional filters (Yu and Koltun, 2016) to exponentially increase the field of view. Transposed convolutional layers are used to upsample from *time* to *depth* dimension. We also use batch-norm (Ioffe, and Szegedy, 2015) and Monte-Carlo dropout (Gal and Ghahramani, 2015) layers after every convolutional layer. Monte-Carlo dropout calculates the epistemic uncertainty of network.
 
-![Alt text](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Figures/Picture2.png)
+![Alt text](https://github.com/pradhan-a/CNN_seismic_facies_classification/blob/master/Figures/Picture2.jpg)
 
 ### Tensorflow (tf) impementation
 Code [train.py](https://github.com/pradhan-a/CNN_rock_type_segmentation/blob/master/Source/train.py) contains main code for training the CNN. This creates the input data pipeline, builds the tf graph and trains it. We expound on these aspects in detail below.
