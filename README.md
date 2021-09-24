@@ -32,5 +32,5 @@ For citing this work, please use citation  "Pradhan A., and Mukerji, T., Seismic
 * Gal, Y., and Ghahramani, Z., Bayesian convolutional neural networks with Bernoulli approximate variational inference. arXiv:1506.02158, 2015.
 * Long, J., Shelhamer, E., Darrell T.,Fully Convolutional Networks for Semantic Segmentation, The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, pp. 3431-3440.
 * Pradhan A., and Mukerji, T., Seismic inversion for reservoir facies under geologically realistic prior uncertainty with 3D convolutional neural networks, 90th Annual International Meeting, SEG, Expanded Abstracts, 2020.
-* Pradhan, A., and Mukerji, T., (2021), Consistency and prior falsification of training data in seismic deep learning: Application to offshore deltaic reservoir characterization, arXiv:2108.13670.
+* Pradhan, A., and Mukerji, T., Consistency and prior falsification of training data in seismic deep learning: Application to offshore deltaic reservoir characterization, arXiv:2108.13670, 2021.
 * Yu, F., and Koltun, V., Multi-scale context aggregation by dilated convolutions, in Proc. Int. Conf. Learn. Representations, 2016.
